@@ -8,6 +8,12 @@ import { useTheme } from "next-themes";
 import { useRef, useEffect, useState } from "react";
 import { Link } from "react-scroll";
 
+interface Project {
+  id: number;
+  title: string;
+  description: string;
+  images: string[];
+}
 export default function Home() {
   const ref = useRef(null);
   const { scrollY } = useScroll();
@@ -40,7 +46,7 @@ export default function Home() {
     },
   ];
 
-  const [activeProject, setActiveProject] = useState(null);
+  const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   // Slideshow otomatis
   useEffect(() => {
