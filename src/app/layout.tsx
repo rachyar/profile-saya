@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
-  title: "Profil Saya",
+  title: "Welcome My Profile",
   description: "Personal portfolio with animations",
 };
 
