@@ -14,6 +14,7 @@ interface Project {
   description: string;
   images: string[];
 }
+
 export default function Home() {
   const ref = useRef(null);
   const { scrollY } = useScroll();
