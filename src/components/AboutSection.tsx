@@ -167,7 +167,7 @@ export default function AboutSection() {
           transition={{ type: "spring", stiffness: 100 }}
           viewport={{ once: true }}
         >
-          "
+          &quot;
         </motion.div>
 
         <motion.blockquote
@@ -177,8 +177,9 @@ export default function AboutSection() {
           transition={{ delay: 0.7, duration: 0.8 }}
           viewport={{ once: true }}
         >
-          Code is like humor. When you have to explain it, it's bad.
+          Code is like humor. When you have to explain it, it&apos;s bad.
         </motion.blockquote>
+
 
         <motion.p
           className="text-sm text-gray-500 dark:text-gray-500 mt-4"
