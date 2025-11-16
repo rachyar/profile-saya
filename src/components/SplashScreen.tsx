@@ -1,4 +1,4 @@
-// src/components/SplashScreen.tsx
+// src/components/SplashScreen.tsx (FIXED HYDRATION ERROR)
 "use client";
 
 import Image from "next/image";
@@ -12,10 +12,10 @@ type SplashScreenProps = {
 export default function SplashScreen({ onEnter }: SplashScreenProps) {
   const [progress, setProgress] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
+    setMounted(true);
     
     const interval = setInterval(() => {
       setProgress((prev) => {
@@ -249,26 +249,34 @@ export default function SplashScreen({ onEnter }: SplashScreenProps) {
         />
       </motion.button>
 
-      {/* Floating Particles */}
-      {[...Array(10)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-2 h-2 bg-purple-400 rounded-full"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-          }}
-          animate={{
-            y: [0, -30, 0],
-            opacity: [0.2, 0.8, 0.2],
-          }}
-          transition={{
-            duration: 3 + Math.random() * 2,
-            repeat: Infinity,
-            delay: Math.random() * 2,
-          }}
-        />
-      ))}
+      {/* Floating Particles - FIXED: Only render after mount */}
+      {mounted && [...Array(10)].map((_, i) => {
+        // Generate random values on client only
+        const left = Math.random() * 100;
+        const top = Math.random() * 100;
+        const duration = 3 + Math.random() * 2;
+        const delay = Math.random() * 2;
+        
+        return (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 bg-purple-400 rounded-full"
+            style={{
+              left: `${left}%`,
+              top: `${top}%`,
+            }}
+            animate={{
+              y: [0, -30, 0],
+              opacity: [0.2, 0.8, 0.2],
+            }}
+            transition={{
+              duration,
+              repeat: Infinity,
+              delay,
+            }}
+          />
+        );
+      })}
     </motion.div>
   );
 }
