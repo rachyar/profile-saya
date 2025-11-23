@@ -2,7 +2,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Sun, Moon, User, Lightbulb, Briefcase } from "lucide-react";
+import { Sun, Moon, User, Lightbulb, Briefcase, Clock } from "lucide-react"; // ← Tambah Clock
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Link } from "react-scroll";
@@ -16,7 +16,7 @@ export default function Navbar() {
     <>
       {/* ===== Navbar Atas (Desktop) ===== */}
       <nav className="fixed top-0 w-full bg-white/80 dark:bg-gray-950/80 backdrop-blur-md z-50 px-6 py-4 hidden md:flex justify-center items-center gap-6">
-        {["about", "skills", "projects"].map((item) => (
+        {["about", "skills", "timeline", "projects"].map((item) => (
           <Link
             key={item}
             to={item}
@@ -50,6 +50,7 @@ export default function Navbar() {
         {[
           { name: "about", icon: <User size={20} /> },
           { name: "skills", icon: <Lightbulb size={20} /> },
+          { name: "timeline", icon: <Clock size={20} /> },
           { name: "projects", icon: <Briefcase size={20} /> },
         ].map((item) => (
           <Link
