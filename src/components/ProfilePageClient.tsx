@@ -1,18 +1,32 @@
-// src/components/ProfilePageClient.tsx
+// src/components/ProfilePageClient.tsx (OPTIMIZED WITH LAZY LOADING)
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
-import Footer from "@/components/Footer";
+import { useRef, useState, lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
-import MusicPlayer, { MusicPlayerHandle } from "@/components/MusicPlayer";
-import ProjectSection from "@/components/ProjectSection";
-import Hero from "@/components/Hero";
-import SplashScreen from "@/components/SplashScreen";
-import SkillSection from "@/components/SkillSection";
-import AboutSection from "@/components/AboutSection";
 import ProfileHeader from "@/components/ProfileHeader";
-import TimelineSection from "@/components/TimelineSection"; // ← TAMBAHKAN INI
+import SplashScreen from "@/components/SplashScreen";
+import { MusicPlayerHandle } from "@/components/MusicPlayer";
+
+// Lazy Load Heavy Components
+const Hero = lazy(() => import("@/components/Hero"));
+const AboutSection = lazy(() => import("@/components/AboutSection"));
+const SkillSection = lazy(() => import("@/components/SkillSection"));
+const TimelineSection = lazy(() => import("@/components/TimelineSection"));
+const ProjectSection = lazy(() => import("@/components/ProjectSection"));
+const MusicPlayer = lazy(() => import("@/components/MusicPlayer"));
+const Footer = lazy(() => import("@/components/Footer"));
+
+// Loading Fallback
+const SectionLoader = () => (
+  <div className="w-full h-40 flex items-center justify-center">
+    <motion.div
+      className="w-12 h-12 border-4 border-purple-600 border-t-transparent rounded-full"
+      animate={{ rotate: 360 }}
+      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+    />
+  </div>
+);
 
 export default function ProfilePageClient() {
   const ref = useRef(null);
@@ -21,9 +35,11 @@ export default function ProfilePageClient() {
 
   const handleEnterProfile = () => {
     setIsProfileVisible(true);
-    if (musicPlayerRef.current) {
-      musicPlayerRef.current.play();
-    }
+    setTimeout(() => {
+      if (musicPlayerRef.current) {
+        musicPlayerRef.current.play();
+      }
+    }, 500);
   };
 
   return (
@@ -41,21 +57,41 @@ export default function ProfilePageClient() {
             className="w-full flex flex-col items-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.5 }}
           >
             <Navbar />
-            <Hero />
+            
+            <Suspense fallback={<SectionLoader />}>
+              <Hero />
+            </Suspense>
+            
             <ProfileHeader />
-            <AboutSection />
-            <SkillSection />
             
-            {/* TAMBAHKAN KOMPONEN TIMELINE DI SINI */}
-            <TimelineSection />
+            <Suspense fallback={<SectionLoader />}>
+              <AboutSection />
+            </Suspense>
             
-            <ProjectSection />
+            <Suspense fallback={<SectionLoader />}>
+              <SkillSection />
+            </Suspense>
+            
+            <Suspense fallback={<SectionLoader />}>
+              <TimelineSection />
+            </Suspense>
+            
+            <Suspense fallback={<SectionLoader />}>
+              <ProjectSection />
+            </Suspense>
+            
             <div className="h-40" />
-            <MusicPlayer ref={musicPlayerRef} />
-            <Footer />
+            
+            <Suspense fallback={null}>
+              <MusicPlayer ref={musicPlayerRef} />
+            </Suspense>
+            
+            <Suspense fallback={null}>
+              <Footer />
+            </Suspense>
           </motion.div>
         )}
       </AnimatePresence>

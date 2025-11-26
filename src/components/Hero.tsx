@@ -1,4 +1,4 @@
-// src/components/Hero.tsx
+// src/components/Hero.tsx (OPTIMIZED)
 "use client";
 
 import Image from "next/image";
@@ -10,7 +10,6 @@ export default function Hero() {
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 150]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
-  const scale = useTransform(scrollY, [0, 300], [1, 1.2]);
 
   return (
     <motion.div
@@ -18,27 +17,17 @@ export default function Hero() {
       style={{ y }}
       className="relative w-full h-[30vh] sm:h-[40vh] md:h-[50vh] lg:h-[60vh] overflow-hidden mt-16 mb-24"
     >
-      {/* Animated Gradient Background */}
-      <motion.div
+      {/* Simplified Gradient Background */}
+      <div
         className="absolute inset-0"
-        animate={{
-          background: [
-            "linear-gradient(135deg, rgba(139, 92, 246, 0.3) 0%, rgba(236, 72, 153, 0.3) 100%)",
-            "linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(139, 92, 246, 0.3) 100%)",
-            "linear-gradient(135deg, rgba(236, 72, 153, 0.3) 0%, rgba(59, 130, 246, 0.3) 100%)",
-            "linear-gradient(135deg, rgba(139, 92, 246, 0.3) 0%, rgba(236, 72, 153, 0.3) 100%)",
-          ],
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: "linear",
+        style={{
+          background: "linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(236, 72, 153, 0.2) 100%)",
         }}
       />
 
       {/* Main Image with Parallax */}
       <motion.div
-        style={{ scale, opacity }}
+        style={{ opacity }}
         className="relative w-full h-full"
       >
         <Image
@@ -47,52 +36,31 @@ export default function Hero() {
           fill
           className="object-contain object-center"
           priority
+          quality={75}
+          sizes="100vw"
         />
       </motion.div>
 
       {/* Overlay dengan Gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white dark:to-gray-950 z-10" />
 
-      {/* Floating Elements */}
-      {[...Array(6)].map((_, i) => (
+      {/* Simplified Floating Elements - REDUCED */}
+      {[...Array(3)].map((_, i) => (
         <motion.div
           key={i}
           className="absolute w-2 h-2 bg-white rounded-full"
           style={{
-            left: `${10 + i * 15}%`,
-            top: `${20 + i * 10}%`,
+            left: `${20 + i * 25}%`,
+            top: `${30 + i * 10}%`,
           }}
           animate={{
-            y: [0, -30, 0],
-            opacity: [0.3, 1, 0.3],
-            scale: [1, 1.5, 1],
+            y: [0, -20, 0],
+            opacity: [0.3, 0.8, 0.3],
           }}
           transition={{
             duration: 3 + i * 0.5,
             repeat: Infinity,
-            delay: i * 0.2,
-          }}
-        />
-      ))}
-
-      {/* Light Streaks */}
-      {[...Array(3)].map((_, i) => (
-        <motion.div
-          key={`streak-${i}`}
-          className="absolute w-1 h-24 bg-gradient-to-b from-white/50 to-transparent"
-          style={{
-            left: `${30 + i * 20}%`,
-            top: "-10%",
-          }}
-          animate={{
-            y: ["0%", "150%"],
-            opacity: [0, 1, 0],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            delay: i * 0.7,
-            ease: "easeIn",
+            delay: i * 0.3,
           }}
         />
       ))}
@@ -100,7 +68,7 @@ export default function Hero() {
       {/* Scroll Indicator */}
       <motion.div
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
-        initial={{ opacity: 0, y: -10 }}
+        initial={{ opacity: 0 }}
         animate={{ 
           opacity: [0.5, 1, 0.5],
           y: [0, 10, 0],
