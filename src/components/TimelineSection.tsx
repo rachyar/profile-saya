@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { GraduationCap, Briefcase, Calendar, X, Download, FileText, ChevronRight, Award } from "lucide-react";
 import { useState } from "react";
 
-// Tipe data diperbarui untuk mendukung multi-dokumen
+// Tipe data untuk multi-dokumen
 interface TimelineDocument {
   title: string;
   url: string;
@@ -19,7 +19,7 @@ interface TimelineItem {
   period: string;
   location: string;
   description: string;
-  documents?: TimelineDocument[]; // Mendukung banyak file (Ijazah, Sertifikat, dll)
+  documents?: TimelineDocument[]; 
   color: string;
 }
 
@@ -57,7 +57,7 @@ const timelineData: TimelineItem[] = [
     institution: "PT. INKA (Persero)",
     period: "2018 (3 Bulan)",
     location: "Madiun",
-    description: "Praktek kerja lapangan sebelum lulus SMK, mempelajari maintenance hardware dan jaringan industri.",
+    description: "Praktek kerja lapangan mempelajari maintenance hardware dan jaringan industri kereta api.",
     documents: [
       { title: "Sertifikat PKL PT. INKA", url: "/sertifikat/pkl-inka.pdf" }
     ],
@@ -65,6 +65,20 @@ const timelineData: TimelineItem[] = [
   },
   {
     id: 4,
+    type: "award",
+    title: "Pengembangan Entrepreneurship",
+    institution: "Seminar & Pelatihan",
+    period: "2018",
+    location: "Nasional",
+    description: "Aktif mengikuti kegiatan pengembangan diri di bidang kewirausahaan dan direct selling.",
+    documents: [
+      { title: "Peserta Motivasi Nasional Entrepreneur Series", url: "/sertifikat/motivasi-entrepreneur-2018.pdf" },
+      { title: "Sertifikat Direct Selling (Memuaskan)", url: "/sertifikat/direct-selling-2018.pdf" }
+    ],
+    color: "from-yellow-500 to-orange-500",
+  },
+  {
+    id: 5,
     type: "education",
     title: "SMK - Teknik & Informatika",
     institution: "SMKN 5 KOTA MADIUN",
@@ -77,7 +91,7 @@ const timelineData: TimelineItem[] = [
     color: "from-green-500 to-emerald-500",
   },
   {
-    id: 5,
+    id: 6,
     type: "award",
     title: "Pelatihan Akuntansi & Manajemen",
     institution: "PP. Wali Barokah Kediri",
@@ -90,66 +104,93 @@ const timelineData: TimelineItem[] = [
     color: "from-teal-600 to-green-600",
   },
   {
-    id: 6,
+    id: 7,
     type: "education",
     title: "Pondok Pesantren & Pengabdian",
     institution: "PP. BUDI UTOMO & Masyarakat",
     period: "2019 - 2022",
     location: "Surakarta & Lamongan",
-    description: "Pendidikan agama (2019-2021), Diklat Guru Al-Quran, serta Pengabdian Mubaligh di Lamongan (2021-2022).",
+    description: "Pendidikan agama, Diklat Guru Al-Quran, serta Pengabdian Mubaligh di Lamongan.",
     documents: [
       { title: "Ijazah Kelulusan Pondok (2021)", url: "/sertifikat/lulus-mondok.pdf" },
-      { title: "Syahadah Diklat Guru Al-Quran Tilawati Level 1 (2021)", url: "/sertifikat/syahadah-tilawati.pdf" },
-      { title: "Sertifikat Pembinaan Mubaligh (2021)", url: "/sertifikat/mubaligh.pdf" },
+      { title: "Syahadah Diklat Guru Al-Quran Tilawati Level 1", url: "/sertifikat/syahadah-tilawati.pdf" },
+      { title: "Sertifikat Pembinaan Mubaligh", url: "/sertifikat/mubaligh.pdf" },
       { title: "Surat Selesai Tugas Pengabdian (2022)", url: "/sertifikat/tugas-lamongan.pdf" }
     ],
     color: "from-indigo-500 to-purple-500",
   },
   {
-    id: 7,
+    id: 8,
     type: "education",
-    title: "Kuliah & Seminar Awal",
-    institution: "Universitas Bina Sarana Informatika",
+    title: "Eksplorasi Karir & Kompetensi",
+    institution: "Pelatihan & Webinar Series",
     period: "2022",
-    location: "Surakarta",
-    description: "Mulai aktif kuliah dan mengikuti berbagai seminar pengembangan karir dan teknologi.",
+    location: "Nasional",
+    description: "Aktif mengikuti berbagai seminar teknologi, pelatihan kompetensi Barista (Karier.mu), data science, dan persiapan karir profesional.",
     documents: [
+      { title: "Sertifikat Kompetensi: Barista & Kopi (Karier.mu)", url: "/sertifikat/barista-kariermu.pdf" },
       { title: "Seminar Karir Tren Industri", url: "/sertifikat/seminar-karir-2022.pdf" },
       { title: "Seminar Transformasi Digital", url: "/sertifikat/seminar-digital.pdf" },
+      { title: "Seminar PING (HIMASTER UNS)", url: "/sertifikat/ping-uns-2022.pdf" },
+      { title: "Practicum X INSPIGO: Data Science Portfolio", url: "/sertifikat/inspigo-data.pdf" },
+      { title: "Pelatihan Entrepreneur Writer (Disbudpar Surakarta)", url: "/sertifikat/writer-solo.pdf" },
+      { title: "Webinar Content Creator (Sahabat Cuan)", url: "/sertifikat/content-creator.pdf" },
+      { title: "Webinar Game Industry Career (Kitalulus)", url: "/sertifikat/game-career.pdf" },
+      { title: "Talkshow: Mahasiswa Kreatif (Dunia Kampus)", url: "/sertifikat/dunia-kampus.pdf" },
+      { title: "Webinar Management Trainee (Kitalulus x Vivo)", url: "/sertifikat/mt-vivo.pdf" },
+      { title: "Webinar Financial 101 (Kitalulus x Ekuid)", url: "/sertifikat/financial-101.pdf" },
       { title: "Webinar Golang Career 2023", url: "/sertifikat/webinar-golang.pdf" }
     ],
     color: "from-violet-500 to-fuchsia-500",
   },
   {
-    id: 8,
+    id: 9,
     type: "award",
-    title: "Sertifikasi & Pelatihan 2023",
+    title: "Sertifikasi & Diklat Nasional",
     institution: "Berbagai Institusi",
     period: "2023",
     location: "Nasional",
-    description: "Mendapatkan sertifikat profisiensi Database Systems, Webinar Guru Inspiratif (AI), dan Diklat Pendidikan Moral Era Digital.",
+    description: "Pengembangan kompetensi teknis database dan metodologi pendidikan nasional.",
     documents: [
       { title: "Profisiensi Database Systems", url: "/sertifikat/database-2023.pdf" },
+      { title: "Webinar Publikasi Hibah Dikti", url: "/sertifikat/hibah-dikti.pdf" },
+      { title: "Diklat Nasional: Asesmen Kurikulum Merdeka", url: "/sertifikat/diklat-asesmen.pdf" },
+      { title: "Diklat Nasional: Kelas Berbasis Proyek", url: "/sertifikat/diklat-proyek.pdf" },
       { title: "Webinar AI untuk Pembelajaran", url: "/sertifikat/webinar-ai-guru.pdf" },
       { title: "Diklat Pendidikan Moral & Etika", url: "/sertifikat/diklat-moral.pdf" }
     ],
     color: "from-pink-500 to-rose-500",
   },
   {
-    id: 9,
+    id: 10,
     type: "award",
-    title: "Organisasi & Prestasi",
-    institution: "HIMSI UBSI Surakarta",
+    title: "Organisasi & Kepanitiaan",
+    institution: "HIMSI & KMS",
     period: "2024",
-    location: "Surakarta",
-    description: "Aktif sebagai Staf Divisi Sosial Masyarakat Himpunan Mahasiswa Sistem Informasi (HIMSI).",
+    location: "Surakarta & Sragen",
+    description: "Aktif dalam organisasi kemahasiswaan dan kepanitiaan event daerah.",
     documents: [
-      { title: "Piagam Penghargaan Staf HIMSI", url: "/sertifikat/piagam-himsi.pdf" }
+      { title: "Piagam Penghargaan Staf HIMSI", url: "/sertifikat/piagam-himsi.pdf" },
+      { title: "Staf Divisi Perkab Sragen University Expo", url: "/sertifikat/sragen-expo.pdf" }
     ],
     color: "from-amber-500 to-orange-500",
   },
   {
-    id: 10,
+    id: 11,
+    type: "education",
+    title: "Wawasan Teknologi & Keamanan Siber",
+    institution: "I2RI & Widya Security",
+    period: "2024",
+    location: "Online",
+    description: "Memperdalam wawasan tentang digitalisasi konstruksi (Smart Construction) dan strategi keamanan siber melawan Ransomware.",
+    documents: [
+      { title: "Project Retrospective: Concrete Goes Digital", url: "/sertifikat/i2ri-smart-construction.pdf" },
+      { title: "Webinar Ransomware Attack Strategy", url: "/sertifikat/ransomware-vodjo.pdf" }
+    ],
+    color: "from-blue-400 to-indigo-400",
+  },
+  {
+    id: 12,
     type: "award",
     title: "Sertifikasi Profesi BNSP",
     institution: "Badan Nasional Sertifikasi Profesi",
@@ -163,7 +204,7 @@ const timelineData: TimelineItem[] = [
     color: "from-emerald-600 to-green-600",
   },
   {
-    id: 11,
+    id: 13,
     type: "award",
     title: "Alibaba Cloud Certified",
     institution: "Alibaba Cloud",
@@ -178,13 +219,26 @@ const timelineData: TimelineItem[] = [
       { title: "Using OSS to Publish a Static Website", url: "/sertifikat/alibaba-4.pdf" },
       { title: "MySQL for Beginners - Basic Queries", url: "/sertifikat/alibaba-5.pdf" },
       { title: "MySQL Database Concepts and Operations", url: "/sertifikat/alibaba-6.pdf" },
-      { title: "Operate and Manage a Relational Database on the Cloud", url: "/sertifikat/alibaba-7.pdf" },
+      { title: "Operate and Manage a Relational Database", url: "/sertifikat/alibaba-7.pdf" },
       { title: "Network Series Courses", url: "/sertifikat/alibaba-8.pdf" },
     ],
     color: "from-orange-600 to-red-600",
   },
   {
-    id: 12,
+    id: 14,
+    type: "education",
+    title: "Seminar Teknologi & Karir IT",
+    institution: "Seminar Series",
+    period: "Januari 2025",
+    location: "Online / Surakarta",
+    description: "Update wawasan teknologi terbaru untuk persiapan karir profesional.",
+    documents: [
+      { title: "Seminar Acceleration Of IT Career", url: "/sertifikat/seminar-it-career-2025.pdf" }
+    ],
+    color: "from-sky-500 to-blue-500",
+  },
+  {
+    id: 15,
     type: "experience",
     title: "Praktek Kerja Lapangan",
     institution: "PT. MITRA DATA ABADI",
@@ -197,7 +251,7 @@ const timelineData: TimelineItem[] = [
     color: "from-teal-500 to-cyan-600",
   },
   {
-    id: 13,
+    id: 16,
     type: "award",
     title: "Uji Kompetensi Bahasa",
     institution: "Language Center",
@@ -207,10 +261,10 @@ const timelineData: TimelineItem[] = [
     documents: [
       { title: "Sertifikat TOEFL Prediction Test", url: "/sertifikat/toefl-2025.pdf" }
     ],
-    color: "from-blue-500 to-indigo-500",
+    color: "from-blue-600 to-indigo-600",
   },
   {
-    id: 14,
+    id: 17,
     type: "experience",
     title: "Programmer (Full-time)",
     institution: "PT. MITRA DATA ABADI",
@@ -223,7 +277,7 @@ const timelineData: TimelineItem[] = [
     color: "from-violet-600 to-purple-600",
   },
   {
-    id: 15,
+    id: 18,
     type: "education",
     title: "Lulus D3 Sistem Informasi",
     institution: "UBSI (Fakultas Teknik & Informatika)",
@@ -368,7 +422,7 @@ export default function TimelineSection() {
         ))}
       </div>
 
-      {/* MODAL SECTION - UPDATED */}
+      {/* MODAL SECTION */}
       <AnimatePresence>
         {selectedItem && selectedItem.documents && showCertificate && (
           <motion.div
@@ -381,10 +435,6 @@ export default function TimelineSection() {
               setSelectedItem(null);
             }}
           >
-            {/* PERUBAHAN DI SINI:
-               - max-w-3xl (sebelumnya 5xl) -> Lebih ramping
-               - h-[85vh] -> Tinggi fix 85% layar
-            */}
             <motion.div
               className="relative w-full max-w-3xl h-[85vh] bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-2xl flex flex-col"
               initial={{ scale: 0.8, y: 100 }}
