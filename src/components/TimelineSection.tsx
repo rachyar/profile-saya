@@ -224,8 +224,22 @@ const timelineData: TimelineItem[] = [
     ],
     color: "from-orange-600 to-red-600",
   },
+  // --- PENAMBAHAN BARU: DomaiNesia (Juli 2024) ---
   {
     id: 14,
+    type: "award",
+    title: "Basic Guide to Cyber Security",
+    institution: "DomaiNesia",
+    period: "Juli 2024",
+    location: "Online",
+    description: "Berpartisipasi dalam #KelasTanya mengenai strategi perlindungan kehadiran online dan pencegahan serangan Phishing.",
+    documents: [
+      { title: "Sertifikat DomaiNesia Cyber Security", url: "/sertifikat/domainesia-security.pdf" }
+    ],
+    color: "from-indigo-500 to-blue-500",
+  },
+  {
+    id: 15,
     type: "education",
     title: "Seminar Teknologi & Karir IT",
     institution: "Seminar Series",
@@ -238,7 +252,7 @@ const timelineData: TimelineItem[] = [
     color: "from-sky-500 to-blue-500",
   },
   {
-    id: 15,
+    id: 16,
     type: "experience",
     title: "Praktek Kerja Lapangan",
     institution: "PT. MITRA DATA ABADI",
@@ -251,7 +265,7 @@ const timelineData: TimelineItem[] = [
     color: "from-teal-500 to-cyan-600",
   },
   {
-    id: 16,
+    id: 17,
     type: "award",
     title: "Uji Kompetensi Bahasa",
     institution: "Language Center",
@@ -264,7 +278,7 @@ const timelineData: TimelineItem[] = [
     color: "from-blue-600 to-indigo-600",
   },
   {
-    id: 17,
+    id: 18,
     type: "experience",
     title: "Programmer (Full-time)",
     institution: "PT. MITRA DATA ABADI",
@@ -277,7 +291,7 @@ const timelineData: TimelineItem[] = [
     color: "from-violet-600 to-purple-600",
   },
   {
-    id: 18,
+    id: 19,
     type: "education",
     title: "Lulus D3 Sistem Informasi",
     institution: "UBSI (Fakultas Teknik & Informatika)",
@@ -290,6 +304,20 @@ const timelineData: TimelineItem[] = [
     ],
     color: "from-yellow-500 to-amber-500",
   },
+  // --- PENAMBAHAN BARU: Jidoka (Januari 2026) ---
+  {
+    id: 20,
+    type: "award",
+    title: "Uji Profisiensi ERP Odoo",
+    institution: "PT Jidoka System Indonesia",
+    period: "Januari 2026",
+    location: "Indonesia",
+    description: "Lulus uji kompetensi ERP Odoo dengan predikat 'Distinguished/Excellent'.",
+    documents: [
+       { title: "Sertifikat Profisiensi ERP Odoo", url: "/sertifikat/jidoka-odoo.pdf" }
+    ],
+    color: "from-red-600 to-rose-600",
+  }
 ];
 
 export default function TimelineSection() {

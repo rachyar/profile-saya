@@ -1,4 +1,4 @@
-// src/components/ProfilePageClient.tsx (OPTIMIZED WITH LAZY LOADING)
+// src/components/ProfilePageClient.tsx
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
@@ -14,6 +14,7 @@ const AboutSection = lazy(() => import("@/components/AboutSection"));
 const SkillSection = lazy(() => import("@/components/SkillSection"));
 const TimelineSection = lazy(() => import("@/components/TimelineSection"));
 const ProjectSection = lazy(() => import("@/components/ProjectSection"));
+const ContactSection = lazy(() => import("@/components/ContactSection")); // <-- (BARU) Import ContactSection
 const MusicPlayer = lazy(() => import("@/components/MusicPlayer"));
 const Footer = lazy(() => import("@/components/Footer"));
 
@@ -81,6 +82,11 @@ export default function ProfilePageClient() {
             
             <Suspense fallback={<SectionLoader />}>
               <ProjectSection />
+            </Suspense>
+
+            {/* --- (BARU) Menampilkan Section Contact --- */}
+            <Suspense fallback={<SectionLoader />}>
+              <ContactSection />
             </Suspense>
             
             <div className="h-40" />
