@@ -15,26 +15,34 @@ export default function ContactSection() {
     e.preventDefault();
     setIsLoading(true);
 
-    // --- BAGIAN KONFIGURASI EMAILJS ---
-    // Ganti string di bawah ini dengan ID dari dashboard EmailJS Anda nanti
-    const SERVICE_ID = "service_se715ys"; 
-    const TEMPLATE_ID = "template_fhvvfea";
-    const PUBLIC_KEY = "ijqmZsYuj9ExNTloz";
+    // --- SECURITY UPDATE: Mengambil keys dari Environment Variables ---
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
+    // --- VALIDASI: Pastikan keys ada sebelum eksekusi ---
+    if (!serviceId || !templateId || !publicKey) {
+      console.error("EmailJS Configuration Error: Keys not found in .env.local");
+      setStatus("error");
+      setIsLoading(false);
+      return;
+    }
 
     if (formRef.current) {
       emailjs
-        .sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, PUBLIC_KEY)
+        .sendForm(serviceId, templateId, formRef.current, publicKey)
         .then(
           (result) => {
-            console.log(result.text);
+            console.log("Email sent:", result.text);
             setStatus("success");
             setIsLoading(false);
             formRef.current?.reset();
+            
             // Reset status kembali ke normal setelah 5 detik
             setTimeout(() => setStatus("idle"), 5000);
           },
           (error) => {
-            console.log(error.text);
+            console.error("Email failed:", error.text);
             setStatus("error");
             setIsLoading(false);
           }
@@ -80,7 +88,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <p className="text-sm text-gray-500 dark:text-gray-500">Email</p>
-                  <p className="font-medium">achyarrifqi9@gmail.com</p> {/* GANTI DENGAN EMAIL ASLI ANDA */}
+                  <p className="font-medium">achyarrifqi9@gmail.com</p>
                 </div>
               </div>
 
@@ -90,7 +98,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <p className="text-sm text-gray-500 dark:text-gray-500">Phone / WhatsApp</p>
-                  <p className="font-medium">+62 851-6540-1804</p> {/* GANTI DENGAN NOMOR ASLI ANDA */}
+                  <p className="font-medium">+62 851-6540-1804</p>
                 </div>
               </div>
 
