@@ -152,7 +152,7 @@ export default function ProfileHeader() {
         {[
           { icon: FaGithub, url: "https://github.com/rachyar", color: "hover:text-gray-900 dark:hover:text-white" },
           { icon: FaLinkedin, url: "https://linkedin.com/in/rifqi-achyar-64363025b", color: "hover:text-blue-500" },
-          { icon: FaInstagram, url: "https://instagram.com/ac_21ht", color: "hover:text-pink-500" },
+          { icon: FaInstagram, url: "https://instagram.com/r14chyar_", color: "hover:text-pink-500" },
         ].map((social, i) => (
           <motion.a
             key={i}

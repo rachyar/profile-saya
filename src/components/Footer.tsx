@@ -36,7 +36,7 @@ export default function Footer() {
             <FaLinkedin size={24} />
           </a>
           <a
-            href="https://instagram.com/ac_21ht"
+            href="https://instagram.com/r14chyar_"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-500 hover:text-pink-400 transition"
